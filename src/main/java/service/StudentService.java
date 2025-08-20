@@ -20,4 +20,15 @@ public class StudentService {
         }
         System.out.println();
     }
+
+    public void FindStudent(int studentId) {
+        Student findstudent = sr.FindStudent(studentId);
+
+        if(findstudent != null){
+            System.out.println(studentId + "학번에 대한 학생 정보는 " + findstudent);
+        } else{
+            System.out.println(studentId + "학번은 잘못 되었습니다.");
+        }
+        System.out.println();
+    }
 }

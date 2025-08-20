@@ -77,4 +77,13 @@ public class StudentRepository {
     public ArrayList<Student> AllFindStudent() {
         return studentsList;
     }
+
+    public Student FindStudent(int studentId) {
+        for(Student s:studentsList){
+            if(s.getStudentId() == studentId){
+                return s;
+            }
+        }
+        return null;
+    }
 }

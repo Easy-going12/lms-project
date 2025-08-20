@@ -26,7 +26,7 @@ public class Run {
 
             switch (choice) {
                 case 1: ss.AllFindStudent(); break;
-                case 2: break;
+                case 2: ss.FindStudent(chooseId()); break;
                 case 3: break;
                 case 4: break;
                 case 5: break;
@@ -37,8 +37,12 @@ public class Run {
                     System.out.println("잘못 입력하였습니다.");
                     System.out.println();
             }
-
         }
+    }
 
+    private static int chooseId() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("학번을 입력해 주세요: ");
+        return sc.nextInt();
     }
 }
