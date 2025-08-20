@@ -1,14 +1,18 @@
 package aggregate;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Student {
+public class Student implements Serializable {
     private int studentId;
     private String pwd;
     private String name;
     private int age;
     private Gender gender;
     private LocalDate birthday;
+
+    public Student() {
+    }
 
     public Student(String pwd, String name, int age, LocalDate birthday) {
         this.pwd = pwd;
