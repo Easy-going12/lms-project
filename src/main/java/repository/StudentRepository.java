@@ -5,6 +5,7 @@ package repository;
 
 import aggregate.Gender;
 import aggregate.Student;
+import stream.MyObjectOutput;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 
 public class StudentRepository {
     private final ArrayList<Student> studentsList = new ArrayList<>();      // 실제 데이터가 저장되는 리스트
-    private final File file = new File("src/main/java/db/test.txt");         // 데이터를 저장할 파일 루트 지정
+    private final File file = new File("src/main/java/db/test.dat");         // 데이터를 저장할 파일 루트 지정
 
     /* 처음 시작할 때, 생성되는 데이터 입력 */
     public StudentRepository() {
@@ -37,6 +38,35 @@ public class StudentRepository {
         /* 더미 데이터가 저장된 defaultStudentsList 값을 studentsList으로 옮기는 과정 */
         loadStudents();
     }
+
+    public int registerStudent(Student signup) {
+        MyObjectOutput moo = null;
+        int result = 0;
+        try{
+            /* 추가한 데이터를 test.dat 파일에 쓰고 flush() 메서드를 사용해서 파일에 바로 입력하고 clear로 추가되지 않은 데이터들을 삭제하고
+            *  loadStudents()함수로 파일에 추가한 데이터까지 저장된 리스트를 studentsList에 넣는다. */
+            moo = new MyObjectOutput(new BufferedOutputStream(new FileOutputStream(file, true)));
+            moo.writeObject(signup);
+            moo.flush();
+
+            studentsList.clear(); // 기존의 정보 지우고 새로운 데이터를 받아오는 부분
+            loadStudents();
+
+            result = 1;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if(moo != null) moo.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return result;
+    }
+
 
     private void saveStudents(ArrayList<Student> defaultStudentsList) {
         ObjectOutputStream oos = null;
@@ -64,7 +94,7 @@ public class StudentRepository {
                 studentsList.add((Student)ois.readObject());    // readObject의 반환형은 Object이고 studentsList는
             }                                                   // Student 타입이기 때문에 Student 타입으로 다운캐스팅하였다.
         } catch(EOFException e){                        // 파일이 처음부터 끝까지 다 읽었다는 의미이다.
-            System.out.println("회원 정보 읽어오기 완료");
+
         } catch(FileNotFoundException e) {              // 파일이 없을 때 생기는 오류
             throw new RuntimeException(e);
         } catch (IOException e) {                       // 입출력 시에 발생하는 오류
@@ -86,4 +116,6 @@ public class StudentRepository {
         }
         return null;
     }
+
+
 }
