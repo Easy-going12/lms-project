@@ -1,7 +1,10 @@
 package controller;
 
+import aggregate.Gender;
+import aggregate.Student;
 import service.StudentService;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Run {
@@ -27,7 +30,7 @@ public class Run {
             switch (choice) {
                 case 1: ss.AllFindStudent(); break;
                 case 2: ss.FindStudent(chooseId()); break;
-                case 3: break;
+                case 3: ss.AddStudent(signup()); break;
                 case 4: break;
                 case 5: break;
                 case 9:
@@ -38,6 +41,44 @@ public class Run {
                     System.out.println();
             }
         }
+    }
+
+    private static Student signup() {
+        Student student = null;
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("학번을 입력하세요: ");
+        int studentId = sc.nextInt();
+
+        System.out.print("패스워드를 입력하세요: ");
+        String pwd  = sc.next();
+
+        System.out.print("이름을 입력하세요: ");
+        String name = sc.next();
+
+        System.out.print("나이을 입력하세요: ");
+        int age = sc.nextInt();
+
+        System.out.print("(남/여) 중에 고르세요: ");
+        Gender gender = null;
+        switch (sc.next()) {
+            case "남":
+                gender = Gender.Male;
+                break;
+            case "여":
+                gender = Gender.Female;
+                break;
+            default:
+                System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");
+        }
+
+        System.out.print("생일(YYYY-MM-DD 형식)을 입력해주세요: ");
+        LocalDate brithday = LocalDate.parse(sc.next());
+
+        student = new Student(studentId, pwd, name, age, gender, brithday);
+
+        return student;
+
     }
 
     private static int chooseId() {
