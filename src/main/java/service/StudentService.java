@@ -39,4 +39,25 @@ public class StudentService {
         else System.out.println("학생 정보 등록에 실패했습니다. ");
         System.out.println();
     }
+
+
+    public Student FindStudentID(int chooseId) {
+        Student st = sr.FindStudentID(chooseId);
+        Student copyMember = null;
+
+        // repositoy에 있는 데이터가 손상되면 안되므로 service에서 copyMember에 기존 데이터를 복사 후, 복사한 생성자에서 값을 변경
+        if(st != null){
+            copyMember = new  Student();
+            copyMember.setPwd(st.getPwd());
+            copyMember.setName(st.getName());
+            copyMember.setAge(st.getAge());
+            copyMember.setBirthday(st.getBirthday());
+        }else{
+            System.out.println("그런 학생은 없습니다.");
+        }
+        return copyMember;
+    }
+
+    public void modityStudent(Student st) {
+    }
 }

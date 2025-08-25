@@ -117,5 +117,14 @@ public class StudentRepository {
         return null;
     }
 
+    public Student FindStudentID(int chooseId) {
+        for(Student s: studentsList){
+            if(s.getStudentId() == chooseId){
+                return s;
+            }
+        }
+        return null;
+    }
+
 
 }
