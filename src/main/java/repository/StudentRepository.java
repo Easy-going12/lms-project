@@ -139,4 +139,17 @@ public class StudentRepository {
     }
 
 
+    public int removeStudentID(int chooseId) {
+        int result = 0;
+
+        for(Student s: studentsList){
+            if(s.getStudentId() == chooseId){
+                studentsList.remove(s);
+                saveStudents(studentsList);
+                result = 1;
+                break;
+            }
+        }
+        return result;
+    }
 }

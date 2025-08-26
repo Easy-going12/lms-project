@@ -69,6 +69,18 @@ public class StudentService {
         }else{
             System.out.println("학생 정보 수정이 이루어지지 않았습니다.");
         }
-        
+        System.out.println();
+    }
+
+    public void removeStudentID(int chooseId) {
+        int result = sr.removeStudentID(chooseId);
+
+        if(result == 1) {
+            System.out.println("회원 정보가 삭제되었습니다.");
+        }
+        else{
+            System.out.println("회원 정보 삭제에 실패하였습니다.");
+        }
+        System.out.println();
     }
 }
