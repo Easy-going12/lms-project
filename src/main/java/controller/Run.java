@@ -31,7 +31,14 @@ public class Run {
                 case 1: ss.AllFindStudent(); break;
                 case 2: ss.FindStudent(chooseId()); break;
                 case 3: ss.AddStudent(signup()); break;
-                case 4: break;
+                case 4:
+                    // 해당 학번에 대한 복사본 정보를 가져온다.
+                    Student st = ss.FindStudentID(chooseId());
+
+                    // reform 메서드가 Object 타입으로 선언되었지만 필요한 필드만 사용하기 위해서 Student 타입으로 다운캐스팅을 하였다
+                    ss.modityStudent(reform(st));
+
+                    break;
                 case 5: break;
                 case 9:
                     System.out.println("프로그램을 종료합니다. bye bye~~~~~~");
@@ -85,5 +92,49 @@ public class Run {
         Scanner sc = new Scanner(System.in);
         System.out.print("학번을 입력해 주세요: ");
         return sc.nextInt();
+    }
+
+    private static Student reform(Student st) {
+
+        Scanner sc = new Scanner(System.in);
+
+        boolean flag = true;
+        while(flag){
+            System.out.println("=====수정할 정보를 입력해 주세요.=====");
+            System.out.println("1. 회원 비밀번호 ");
+            System.out.println("2. 회원 이름 ");
+            System.out.println("3. 회원 나이 ");
+            System.out.println("4. 회원 생일 ");
+            System.out.println("9. 메인 메뉴로 돌아가기");
+            System.out.print("수정 할 번호를 입력하세요: ");
+            int choose = sc.nextInt();
+            sc.nextLine();
+            switch (choose) {
+                case 1:
+                    System.out.print("수정할 회원의 비밀번호를 입력해주세요: ");
+                    st.setPwd(sc.nextLine());
+                    break;
+                case 2:
+                    System.out.print("수정할 회원의 이름을 입력해주세요: ");
+                    st.setName(sc.nextLine());
+                    break;
+                case 3:
+                    System.out.print("수정할 회원의 나이를 입력해주세요: ");
+                    st.setAge(sc.nextInt());
+                    break;
+                case 4:
+                    System.out.print("수정할 회원의 생일(YYYY-MM-DD 형식)을 입력해주세요: ");
+                    st.setBirthday(LocalDate.parse(sc.next()));
+                    break;
+                case 9:
+                    System.out.println("메인 메뉴로 돌아갑니다");
+                    flag = false;
+                    break;
+                default:
+                    System.out.println("숫자를 잘못 입력했습니다.");
+                    break;
+            }
+        }
+        return st;
     }
 }

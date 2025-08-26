@@ -117,5 +117,26 @@ public class StudentRepository {
         return null;
     }
 
+    public Student FindStudentID(int chooseId) {
+        for(Student s: studentsList){
+            if(s.getStudentId() == chooseId){
+                return s;
+            }
+        }
+        return null;
+    }
+
+    // 수정했던 학생 정보가 담겨 있는 st 배열 정보를 원본 저장소인 studentsList에 담는 메소드
+    public int modityStudent(Student st) {
+        for(int i = 0; i<studentsList.size(); i++){
+            if(studentsList.get(i).getStudentId() == st.getStudentId()){
+                studentsList.set(i, st);
+                saveStudents(studentsList);
+                return 1;
+            }
+        }
+        return 0;
+    }
+
 
 }

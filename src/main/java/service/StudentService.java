@@ -39,4 +39,36 @@ public class StudentService {
         else System.out.println("학생 정보 등록에 실패했습니다. ");
         System.out.println();
     }
+
+
+    public Student FindStudentID(int chooseId) {
+        Student st = sr.FindStudentID(chooseId);
+        Student copyMember = null;
+
+        // repository 있는 데이터가 손상되면 안되므로 service에서 copyMember에 기존 데이터를 복사 후, 복사한 생성자에서 값을 변경
+        if(st != null){
+            copyMember = new  Student();
+            copyMember.setStudentId(st.getStudentId());     // 학번을 추가하지 않으면 수정할 때 어느 학번에 대한 정보를 수정하는지
+                                                            // 알수 없기 때문에 학번 내용도 넣어야 한다.
+            copyMember.setPwd(st.getPwd());
+            copyMember.setName(st.getName());
+            copyMember.setAge(st.getAge());
+            copyMember.setBirthday(st.getBirthday());
+            copyMember.setGender(st.getGender());
+        }else{
+            System.out.println("그런 학생은 없습니다.");
+        }
+        return copyMember;
+    }
+
+    public void modityStudent(Student st) {
+        int result = sr.modityStudent(st);
+
+        if(result >0){
+            System.out.println("학생 정보가 수정되었습니다.");
+        }else{
+            System.out.println("학생 정보 수정이 이루어지지 않았습니다.");
+        }
+        
+    }
 }
