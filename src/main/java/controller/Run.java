@@ -39,7 +39,9 @@ public class Run {
                     ss.modityStudent(reform(st));
 
                     break;
-                case 5: break;
+                case 5:
+                    ss.removeStudentID(chooseId());
+                    break;
                 case 9:
                     System.out.println("프로그램을 종료합니다. bye bye~~~~~~");
                     return;
