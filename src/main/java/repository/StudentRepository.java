@@ -145,6 +145,7 @@ public class StudentRepository {
         for(Student s: studentsList){
             if(s.getStudentId() == chooseId){
                 studentsList.remove(s);
+                saveStudents(studentsList);
                 result = 1;
                 break;
             }
