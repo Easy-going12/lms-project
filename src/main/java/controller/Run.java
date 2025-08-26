@@ -36,7 +36,7 @@ public class Run {
                     Student st = ss.FindStudentID(chooseId());
 
                     // reform 메서드가 Object 타입으로 선언되었지만 필요한 필드만 사용하기 위해서 Student 타입으로 다운캐스팅을 하였다
-                    ss.modityStudent((Student) reform(st));
+                    ss.modityStudent(reform(st));
 
                     break;
                 case 5: break;
@@ -101,11 +101,14 @@ public class Run {
         boolean flag = true;
         while(flag){
             System.out.println("=====수정할 정보를 입력해 주세요.=====");
-            System.out.print("1. 회원 비밀번호 ");
-            System.out.print("2. 회원 이름 ");
-            System.out.print("3. 회원 나이 ");
-            System.out.print("4. 회원 생일 ");
+            System.out.println("1. 회원 비밀번호 ");
+            System.out.println("2. 회원 이름 ");
+            System.out.println("3. 회원 나이 ");
+            System.out.println("4. 회원 생일 ");
+            System.out.println("9. 메인 메뉴로 돌아가기");
+            System.out.print("수정 할 번호를 입력하세요: ");
             int choose = sc.nextInt();
+            sc.nextLine();
             switch (choose) {
                 case 1:
                     System.out.print("수정할 회원의 비밀번호를 입력해주세요: ");
