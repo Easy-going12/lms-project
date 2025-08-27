@@ -29,7 +29,7 @@ public class Run {
 
             switch (choice) {
                 case 1: ss.AllFindStudent(); break;
-                case 2: ss.FindStudent(chooseId()); break;
+                case 2: ss.FindStudent(); break;
                 case 3: ss.AddStudent(signup()); break;
                 case 4:
                     // 해당 학번에 대한 복사본 정보를 가져온다.
@@ -92,7 +92,7 @@ public class Run {
 
     private static int chooseId() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("학번을 입력해 주세요: ");
+        System.out.print("조회할 학번을 입력해 주세요(9번을 누르면 뒤로 갑니다): ");
         return sc.nextInt();
     }
 

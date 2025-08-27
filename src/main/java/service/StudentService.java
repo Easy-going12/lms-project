@@ -4,6 +4,7 @@ import aggregate.Student;
 import repository.StudentRepository;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class StudentService {
     private static final StudentRepository sr = new StudentRepository();
@@ -21,15 +22,29 @@ public class StudentService {
         System.out.println();
     }
 
-    public void FindStudent(int studentId) {
-        Student findstudent = sr.FindStudent(studentId);
+    public void FindStudent() {
+        Scanner sc = new Scanner(System.in);
 
-        if(findstudent != null){
-            System.out.println(studentId + "학번에 대한 학생 정보는 " + findstudent);
-        } else{
-            System.out.println(studentId + "학번은 잘못 되었습니다.");
+        while(true){
+            System.out.print("조회할 학번을 입력해 주세요.(9번 입력시 뒤로 갑니다): ");
+            int chooseId = sc.nextInt();
+
+            if(chooseId == 9){
+                System.out.println("뒤로 갑니다.");
+                System.out.println();
+                break;
+            }
+
+            Student findstudent = sr.FindStudent(chooseId);
+
+            if(findstudent != null){
+                System.out.println(chooseId + "학번에 대한 학생 정보는 " + findstudent);
+            } else{
+                System.out.println(chooseId + "학번은 잘못 되었습니다.");
+            }
+            System.out.println();
         }
-        System.out.println();
+
     }
 
     public void AddStudent(Student signup) {
