@@ -5,6 +5,7 @@ import aggregate.Student;
 import service.StudentService;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Run {
@@ -54,10 +55,19 @@ public class Run {
 
     private static Student signup() {
         Student student = null;
-
         Scanner sc = new Scanner(System.in);
-        System.out.print("학번을 입력하세요: ");
-        int studentId = sc.nextInt();
+        int studentId = 0;
+        Gender gender = null;
+        LocalDate birthday = null;
+
+        while(true){
+            System.out.print("학번을 입력하세요: ");
+            studentId = sc.nextInt();
+
+            if(String.valueOf(studentId).length()== 9) break;
+
+            System.out.println("학번은 9자리여야 합니다. 다시 입력해 주세요.");
+        }
 
         System.out.print("패스워드를 입력하세요: ");
         String pwd  = sc.next();
@@ -68,26 +78,34 @@ public class Run {
         System.out.print("나이을 입력하세요: ");
         int age = sc.nextInt();
 
-        System.out.print("(남/여) 중에 고르세요: ");
-        Gender gender = null;
-        switch (sc.next()) {
-            case "남":
+        while(true){
+            System.out.print("(남/여) 중에 고르세요: ");
+            String input = sc.next();
+
+            if(input.equals("남")){
                 gender = Gender.Male;
                 break;
-            case "여":
+            }else if(input.equals("여")){
                 gender = Gender.Female;
                 break;
-            default:
-                System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");
+            }else{
+                System.out.println("남 혹은 여 중에 고르세요");
+            }
         }
 
-        System.out.print("생일(YYYY-MM-DD 형식)을 입력해주세요: ");
-        LocalDate brithday = LocalDate.parse(sc.next());
+        while(true){
+            try{
+                System.out.print("생일(YYYY-MM-DD 형식)을 입력해주세요: ");
+                birthday = LocalDate.parse(sc.next());
+                break;
+            }catch(DateTimeParseException e){
+                System.out.println("잘못된 형식입니다. 올바르게 입려개주세요");
+            }
+        }
 
-        student = new Student(studentId, pwd, name, age, gender, brithday);
+        student = new Student(studentId, pwd, name, age, gender, birthday);
 
         return student;
-
     }
 
     private static int chooseId() {

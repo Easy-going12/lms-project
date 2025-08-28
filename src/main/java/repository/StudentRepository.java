@@ -46,6 +46,11 @@ public class StudentRepository {
             /* 추가한 데이터를 test.dat 파일에 쓰고 flush() 메서드를 사용해서 파일에 바로 입력하고 clear로 추가되지 않은 데이터들을 삭제하고
             *  loadStudents()함수로 파일에 추가한 데이터까지 저장된 리스트를 studentsList에 넣는다. */
             moo = new MyObjectOutput(new BufferedOutputStream(new FileOutputStream(file, true)));
+            for(Student s: studentsList) {
+                if(signup.getStudentId() == s.getStudentId()) {
+                    return 2;
+                }
+            }
             moo.writeObject(signup);
             moo.flush();
 

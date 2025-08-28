@@ -51,6 +51,7 @@ public class StudentService {
         int result = sr.registerStudent(signup);     // 회원을 기존 리스트에 넣는 부분 성공했을 경우 1을 반환
                                                                     // 실패하면 0 반환
         if(result == 1) System.out.println("학생 정보가 등록되었습니다.");
+        else if(result ==2) System.out.println("이미 등록되어 있는 학번입니다.");
         else System.out.println("학생 정보 등록에 실패했습니다. ");
         System.out.println();
     }
