@@ -24,7 +24,7 @@ public class Run {
             System.out.println("4. 학생 정보 수정");
             System.out.println("5. 학생 정보 삭제");
             System.out.println("9. 프로그램 종료");
-            System.out.println();
+            System.out.println( );
             System.out.print("메뉴를 선택해주세요: ");
             int choice = sc.nextInt();
 
