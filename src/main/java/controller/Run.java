@@ -16,7 +16,6 @@ public class Run {
 
         Scanner sc = new Scanner(System.in);
         
-        // 기존에 했던 시스템에서 점차 수정해 나갈 예정
         while(true){
             System.out.println("===== 학사 관리 시스템 =====");
             System.out.println("1. 모든 학생 정보 조회");
